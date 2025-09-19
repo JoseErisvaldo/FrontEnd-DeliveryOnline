@@ -3,8 +3,8 @@ import {
   useContext,
   useState,
   useEffect,
+  type ReactNode,
 } from 'react';
-import type { ReactNode } from 'react';
 
 type User = {
   id: string;
@@ -13,31 +13,42 @@ type User = {
 
 type AuthContextType = {
   user: User | null;
+  token: string | null;
   signIn: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const localStorageKey = 'authUser';
-    const [user, setUser] = useState<User | null>(null);
-    const [token, setToken] = useState<string>('')
+  const tokenKey = 'authToken';
+  const userKey = 'authUser';
+
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    const savedUser = localStorage.getItem(localStorageKey);
-    if (savedUser) {
-      setToken(JSON.parse(savedUser));
-    }
+    const savedToken = localStorage.getItem(tokenKey);
+    const savedUser = localStorage.getItem(userKey);
+
+    if (savedToken) setToken(savedToken);
+    if (savedUser) setUser(JSON.parse(savedUser));
   }, []);
 
   useEffect(() => {
     if (token) {
-      localStorage.setItem(localStorageKey, JSON.stringify(token));
+      localStorage.setItem(tokenKey, token);
     } else {
-      localStorage.removeItem(localStorageKey);
+      localStorage.removeItem(tokenKey);
     }
-  }, [token]);
+
+    if (user) {
+      localStorage.setItem(userKey, JSON.stringify(user));
+    } else {
+      localStorage.removeItem(userKey);
+    }
+  }, [token, user]);
 
   const signIn = async (email: string, password: string) => {
     if (!email || !password) {
@@ -49,26 +60,44 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
-    console.log(response)
+
     if (!response.ok) {
       throw new Error('Erro na autenticação');
     }
 
     const data = await response.json();
 
-    setUser({
-      id: data.id,
-      email: data.email,
-    });
+    setUser({ id: data.id, email: data.email });
     setToken(data.access_token);
+  };
+
+  const signUp = async (email: string, password: string) => {
+    if (!email || !password) {
+      throw new Error('Credenciais inválidas');
+    }
+
+    const response = await fetch('http://localhost:3001/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Erro ao criar conta');
+    }
+    
+    const data = await response.json();
+    console.log('Usuário criado com sucesso');
+    return data;
   };
 
   const signOut = async () => {
     setUser(null);
+    setToken(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user, token, signIn, signUp, signOut }}>
       {children}
     </AuthContext.Provider>
   );
