@@ -1,5 +1,3 @@
 export default function CustomersFeedbacks() {
-  return (
-    <div>página: Feedbacks</div>
-  );
+  return <div>página: Feedbacks</div>;
 }

@@ -1,5 +1,3 @@
 export default function MenuCombos() {
-  return (
-    <div>página: Combos</div>
-  );
+  return <div>página: Combos</div>;
 }

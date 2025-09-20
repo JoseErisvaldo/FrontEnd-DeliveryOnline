@@ -1,5 +1,3 @@
 export default function DashboardReports() {
-  return (
-    <div>página: Reports</div>
-  );
+  return <div>página: Reports</div>;
 }

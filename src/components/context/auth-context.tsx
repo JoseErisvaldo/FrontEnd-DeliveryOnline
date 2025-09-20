@@ -76,16 +76,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       throw new Error('Credenciais inválidas');
     }
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/register`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/auth/register`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error('Erro ao criar conta');
     }
-    
+
     const data = await response.json();
     console.log('Usuário criado com sucesso');
     return data;

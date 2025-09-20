@@ -1,5 +1,3 @@
 export default function CustomersIndex() {
-  return (
-    <div>página: Index</div>
-  );
+  return <div>página: Index</div>;
 }

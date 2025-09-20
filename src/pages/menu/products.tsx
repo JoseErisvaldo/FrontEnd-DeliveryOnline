@@ -1,5 +1,3 @@
 export default function MenuProducts() {
-  return (
-    <div>página: Products</div>
-  );
+  return <div>página: Products</div>;
 }

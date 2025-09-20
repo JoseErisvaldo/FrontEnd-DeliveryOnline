@@ -1,48 +1,56 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useState } from "react"
-import { Mail, Lock, Eye, EyeOff, User } from "lucide-react"
+import { useState } from 'react';
+import { Mail, Lock, Eye, EyeOff, User } from 'lucide-react';
 
-import { Button } from "@/components/ui/button"
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useAuth } from "../context/auth-context"
-import { useNavigate } from "react-router-dom"
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useAuth } from '../context/auth-context';
+import { useNavigate } from 'react-router-dom';
 
 export function CardSignUp() {
-  const navigate = useNavigate()
-  const { signUp } = useAuth()
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
-  const [error, setError] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const navigate = useNavigate();
+  const { signUp } = useAuth();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
+    e.preventDefault();
+    setError('');
 
     if (password !== confirmPassword) {
-      setError("As senhas não coincidem")
-      return
+      setError('As senhas não coincidem');
+      return;
     }
 
     if (password.length < 6) {
-      setError("A senha deve ter pelo menos 6 caracteres")
-      return
+      setError('A senha deve ter pelo menos 6 caracteres');
+      return;
     }
 
     try {
-      await signUp(email, password)
-      navigate("/")
+      await signUp(email, password);
+      navigate('/');
     } catch (err) {
-      setError("Erro ao criar conta. Tente novamente.")
+      setError('Erro ao criar conta. Tente novamente.');
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
@@ -56,7 +64,9 @@ export function CardSignUp() {
             </div>
           </div>
 
-          <CardTitle className="text-3xl font-bold text-center text-foreground">Criar sua conta</CardTitle>
+          <CardTitle className="text-3xl font-bold text-center text-foreground">
+            Criar sua conta
+          </CardTitle>
           <CardDescription className="text-center text-muted-foreground text-base leading-relaxed">
             Preencha os dados abaixo para criar sua conta
           </CardDescription>
@@ -64,7 +74,7 @@ export function CardSignUp() {
             <Button
               variant="link"
               className="text-secondary-foreground hover:text-secondary-foreground/80 font-medium transition-colors duration-200"
-              onClick={() => (window.location.href = "/auth/sign-in")}
+              onClick={() => (window.location.href = '/auth/sign-in')}
             >
               Já tem conta? Entrar
             </Button>
@@ -75,7 +85,10 @@ export function CardSignUp() {
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-5">
               <div className="space-y-3">
-                <Label htmlFor="email" className="text-sm font-semibold text-foreground">
+                <Label
+                  htmlFor="email"
+                  className="text-sm font-semibold text-foreground"
+                >
                   E-mail
                 </Label>
                 <div className="relative">
@@ -93,14 +106,17 @@ export function CardSignUp() {
               </div>
 
               <div className="space-y-3">
-                <Label htmlFor="password" className="text-sm font-semibold text-foreground">
+                <Label
+                  htmlFor="password"
+                  className="text-sm font-semibold text-foreground"
+                >
                   Senha
                 </Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
                   <Input
                     id="password"
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     placeholder="Mínimo 6 caracteres"
                     required
                     className="pl-11 pr-11 h-12 rounded-xl border-2 border-input focus:border-ring focus:ring-2 focus:ring-ring/20 transition-all duration-200 bg-background"
@@ -112,20 +128,27 @@ export function CardSignUp() {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors duration-200"
                   >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
               </div>
 
               <div className="space-y-3">
-                <Label htmlFor="confirmPassword" className="text-sm font-semibold text-foreground">
+                <Label
+                  htmlFor="confirmPassword"
+                  className="text-sm font-semibold text-foreground"
+                >
                   Confirmar senha
                 </Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
                   <Input
                     id="confirmPassword"
-                    type={showConfirmPassword ? "text" : "password"}
+                    type={showConfirmPassword ? 'text' : 'password'}
                     placeholder="Digite a senha novamente"
                     required
                     className="pl-11 pr-11 h-12 rounded-xl border-2 border-input focus:border-ring focus:ring-2 focus:ring-ring/20 transition-all duration-200 bg-background"
@@ -137,14 +160,20 @@ export function CardSignUp() {
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors duration-200"
                   >
-                    {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showConfirmPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
               </div>
 
               {error && (
                 <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-3">
-                  <p className="text-destructive text-sm font-medium">{error}</p>
+                  <p className="text-destructive text-sm font-medium">
+                    {error}
+                  </p>
                 </div>
               )}
             </div>
@@ -162,5 +191,5 @@ export function CardSignUp() {
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }

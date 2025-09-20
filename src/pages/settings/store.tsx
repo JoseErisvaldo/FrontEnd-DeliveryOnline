@@ -1,5 +1,3 @@
 export default function SettingsStore() {
-  return (
-    <div>página: Store</div>
-  );
+  return <div>página: Store</div>;
 }

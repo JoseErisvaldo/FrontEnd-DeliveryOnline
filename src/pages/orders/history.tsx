@@ -1,5 +1,3 @@
 export default function OrdersHistory() {
-  return (
-    <div>página: History</div>
-  );
+  return <div>página: History</div>;
 }

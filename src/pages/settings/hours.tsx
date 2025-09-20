@@ -1,5 +1,3 @@
 export default function SettingsHours() {
-  return (
-    <div>página: Hours</div>
-  );
+  return <div>página: Hours</div>;
 }

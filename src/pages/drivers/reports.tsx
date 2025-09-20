@@ -1,5 +1,3 @@
 export default function DriversReports() {
-  return (
-    <div>página: Reports</div>
-  );
+  return <div>página: Reports</div>;
 }

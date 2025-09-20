@@ -1,5 +1,3 @@
 export default function SettingsTeam() {
-  return (
-    <div>página: Team</div>
-  );
+  return <div>página: Team</div>;
 }

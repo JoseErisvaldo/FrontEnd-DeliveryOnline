@@ -1,5 +1,3 @@
 export default function DriversRoutes() {
-  return (
-    <div>página: Routes</div>
-  );
+  return <div>página: Routes</div>;
 }

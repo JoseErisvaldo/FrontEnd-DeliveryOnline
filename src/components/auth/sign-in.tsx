@@ -1,37 +1,45 @@
-"use client"
+'use client';
 
-import type React from "react"
+import type React from 'react';
 
-import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { Mail, Lock, Eye, EyeOff } from "lucide-react"
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 
-import { Button } from "@/components/ui/button"
-import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useAuth } from "../context/auth-context"
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { useAuth } from '../context/auth-context';
 
 export function CardSignIn() {
-  const { signIn } = useAuth()
-  const navigate = useNavigate()
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
+    e.preventDefault();
+    setError('');
 
     try {
-      await signIn(email, password)
-      navigate("/")
+      await signIn(email, password);
+      navigate('/');
     } catch (err) {
-      setError("E-mail ou senha inválidos")
+      setError('E-mail ou senha inválidos');
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
@@ -45,12 +53,14 @@ export function CardSignIn() {
             </div>
           </div>
 
-          <CardTitle className="text-3xl font-bold text-center text-foreground">Entrar na sua conta</CardTitle>
+          <CardTitle className="text-3xl font-bold text-center text-foreground">
+            Entrar na sua conta
+          </CardTitle>
           <CardDescription className="text-center text-muted-foreground text-base leading-relaxed">
             Insira seu e-mail abaixo para acessar sua conta
           </CardDescription>
           <CardAction className="text-center">
-            <Link to={"/auth/sign-up"}>
+            <Link to={'/auth/sign-up'}>
               <Button
                 variant="link"
                 className="text-primary hover:text-primary/80 font-medium transition-colors duration-200"
@@ -65,7 +75,10 @@ export function CardSignIn() {
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-6">
               <div className="space-y-3">
-                <Label htmlFor="email" className="text-sm font-semibold text-foreground">
+                <Label
+                  htmlFor="email"
+                  className="text-sm font-semibold text-foreground"
+                >
                   E-mail
                 </Label>
                 <div className="relative">
@@ -84,7 +97,10 @@ export function CardSignIn() {
 
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <Label htmlFor="password" className="text-sm font-semibold text-foreground">
+                  <Label
+                    htmlFor="password"
+                    className="text-sm font-semibold text-foreground"
+                  >
                     Senha
                   </Label>
                   <a
@@ -98,7 +114,7 @@ export function CardSignIn() {
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
                   <Input
                     id="password"
-                    type={showPassword ? "text" : "password"}
+                    type={showPassword ? 'text' : 'password'}
                     required
                     className="pl-11 pr-11 h-12 rounded-xl border-2 border-input focus:border-ring focus:ring-2 focus:ring-ring/20 transition-all duration-200 bg-background"
                     value={password}
@@ -109,14 +125,20 @@ export function CardSignIn() {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors duration-200"
                   >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
               </div>
 
               {error && (
                 <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-3">
-                  <p className="text-destructive text-sm font-medium">{error}</p>
+                  <p className="text-destructive text-sm font-medium">
+                    {error}
+                  </p>
                 </div>
               )}
             </div>
@@ -134,5 +156,5 @@ export function CardSignIn() {
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }

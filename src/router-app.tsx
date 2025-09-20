@@ -1,48 +1,53 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
-import { Suspense, type ReactNode } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from 'react-router-dom';
+import { Suspense, type ReactNode } from 'react';
 
-import { AuthProvider, useAuth } from "./components/context/auth-context";
-import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
-import { AppSidebar } from "./components/app-sidebar";
-import { ThemeProvider } from "./components/theme-provider";
-import { CardSignIn } from "./components/auth/sign-in";
-import { CardSignUp } from "./components/auth/sign-up";
-import Home from "./pages/home/page";
-import DashboardOverview from "./pages/dashboard/overview";
-import DashboardReports from "./pages/dashboard/reports";
-import DashboardAnalytics from "./pages/dashboard/analytics";
-import OrdersActive from "./pages/orders/active";
-import OrdersHistory from "./pages/orders/history";
-import OrdersCancelled from "./pages/orders/cancelled";
-import MenuProducts from "./pages/menu/products";
-import MenuCategories from "./pages/menu/categories";
-import MenuCombos from "./pages/menu/combos";
-import CustomersFeedbacks from "./pages/customers/feedbacks";
-import CustomersLoyalty from "./pages/customers/loyalty";
-import DriversRoutes from "./pages/drivers/routes";
-import DriversReports from "./pages/drivers/reports";
-import FinancePayments from "./pages/finance/payments";
-import FinanceInvoices from "./pages/finance/invoices";
-import FinanceFees from "./pages/finance/fees";
-import SettingsStore from "./pages/settings/store";
-import SettingsHours from "./pages/settings/hours";
-import SettingsIntegrations from "./pages/settings/integrations";
-import SettingsTeam from "./pages/settings/team";
+import { AuthProvider, useAuth } from './components/context/auth-context';
+import { SidebarProvider, SidebarTrigger } from './components/ui/sidebar';
+import { AppSidebar } from './components/app-sidebar';
+import { ThemeProvider } from './components/theme-provider';
+import { CardSignIn } from './components/auth/sign-in';
+import { CardSignUp } from './components/auth/sign-up';
+import Home from './pages/home/page';
+import DashboardOverview from './pages/dashboard/overview';
+import DashboardReports from './pages/dashboard/reports';
+import DashboardAnalytics from './pages/dashboard/analytics';
+import OrdersActive from './pages/orders/active';
+import OrdersHistory from './pages/orders/history';
+import OrdersCancelled from './pages/orders/cancelled';
+import MenuProducts from './pages/menu/products';
+import MenuCategories from './pages/menu/categories';
+import MenuCombos from './pages/menu/combos';
+import CustomersFeedbacks from './pages/customers/feedbacks';
+import CustomersLoyalty from './pages/customers/loyalty';
+import DriversRoutes from './pages/drivers/routes';
+import DriversReports from './pages/drivers/reports';
+import FinancePayments from './pages/finance/payments';
+import FinanceInvoices from './pages/finance/invoices';
+import FinanceFees from './pages/finance/fees';
+import SettingsStore from './pages/settings/store';
+import SettingsHours from './pages/settings/hours';
+import SettingsIntegrations from './pages/settings/integrations';
+import SettingsTeam from './pages/settings/team';
 
-const LOCAL_STORAGE_KEY = "sidebar-active-route";
+const LOCAL_STORAGE_KEY = 'sidebar-active-route';
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const { token } = useAuth();
   const location = useLocation();
-  const lastPath = localStorage.getItem(LOCAL_STORAGE_KEY) || "/";
+  const lastPath = localStorage.getItem(LOCAL_STORAGE_KEY) || '/';
 
   if (!token) return <Navigate to="/auth/sign-in" />;
-  if (location.pathname === "/" && lastPath !== "/") {
+  if (location.pathname === '/' && lastPath !== '/') {
     return <Navigate to={lastPath} replace />;
   }
 
   return <>{children}</>;
-
 };
 
 const PublicRoute = ({ children }: { children: ReactNode }) => {

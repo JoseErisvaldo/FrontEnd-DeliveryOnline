@@ -1,5 +1,3 @@
 export default function MenuCategories() {
-  return (
-    <div>página: Categories</div>
-  );
+  return <div>página: Categories</div>;
 }
