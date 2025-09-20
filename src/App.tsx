@@ -3,9 +3,7 @@ import { RouterApp } from './router-app';
 
 function App() {
   return (
-    <div>
       <RouterApp />
-    </div>
   );
 }
 
