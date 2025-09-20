@@ -10,7 +10,6 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
@@ -101,9 +100,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     localStorage.setItem(localStorageKey, location.pathname);
   }, [location.pathname]);
 
-  // recuperar rota ativa salva
-  const savedPath = localStorage.getItem(localStorageKey) || location.pathname;
-
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -120,12 +116,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <SidebarMenu>
                   {group.items.map((item) => (
                     <SidebarMenuItem key={item.title}>
-                      <SidebarMenuButton
+                      <Button
+                        variant={
+                          location.pathname === item.url ? 'default' : 'outline'
+                        }
+                        className="w-full justify-start border-none "
                         asChild
-                        isActive={savedPath === item.url} // 🔥 marca ativo mesmo após reload
                       >
                         <NavLink to={item.url}>{item.title}</NavLink>
-                      </SidebarMenuButton>
+                      </Button>
                     </SidebarMenuItem>
                   ))}
                 </SidebarMenu>

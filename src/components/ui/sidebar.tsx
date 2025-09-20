@@ -267,7 +267,7 @@ function SidebarTrigger({
       variant="ghost"
       size="icon"
       className={cn('size-7', className)}
-      onClick={(event) => {
+      onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
         onClick?.(event);
         toggleSidebar();
       }}
@@ -495,6 +495,15 @@ const sidebarMenuButtonVariants = cva(
   }
 );
 
+interface SidebarMenuButtonProps extends React.ComponentProps<'button'> {
+  asChild?: boolean;
+  isActive?: boolean;
+  variant?: 'default' | 'outline';
+  size?: 'default' | 'sm' | 'lg';
+  tooltip?: string | React.ComponentProps<typeof TooltipContent>;
+  className?: string;
+}
+
 function SidebarMenuButton({
   asChild = false,
   isActive = false,
@@ -503,11 +512,7 @@ function SidebarMenuButton({
   tooltip,
   className,
   ...props
-}: React.ComponentProps<'button'> & {
-  asChild?: boolean;
-  isActive?: boolean;
-  tooltip?: string | React.ComponentProps<typeof TooltipContent>;
-} & VariantProps<typeof sidebarMenuButtonVariants>) {
+}: SidebarMenuButtonProps & typeof sidebarMenuButtonVariants) {
   const Comp = asChild ? Slot : 'button';
   const { isMobile, state } = useSidebar();
 
@@ -722,5 +727,4 @@ export {
   SidebarRail,
   SidebarSeparator,
   SidebarTrigger,
-  useSidebar,
 };
