@@ -1,4 +1,4 @@
-import { getAllEstablishmentsService } from "@/components/service/establishment/get-all-establishments-service";
+import { getAllEstablishmentsService } from "@/service/establishment/get-all-establishments-service";
 import { useEffect, useState } from "react";
 import type { EstablishmentResponse } from "@/types/establishment";
 

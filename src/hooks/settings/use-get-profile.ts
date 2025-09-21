@@ -1,4 +1,4 @@
-import { getProfileService } from "@/components/service/profile/get-profile-service";
+import { getProfileService } from "@/service/profile/get-profile-service";
 import type { ProfileResponse } from "@/types/user";
 import { useEffect, useState } from "react";
 
