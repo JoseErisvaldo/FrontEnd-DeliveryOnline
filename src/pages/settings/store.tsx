@@ -4,7 +4,7 @@ import Store from "@/components/settingsSettings/store";
 
 
 export default function SettingsStore() {
-  return <div>
+  return <div className="flex flex-col gap-6">
     <HeaderSettings />
     <UserSettings />
     <Store />
