@@ -15,7 +15,7 @@ type AuthContextType = {
   user: User | null;
   token: string | null;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, name: string) => Promise<void>;
   signOut: () => Promise<void>;
 };
 
@@ -71,8 +71,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setToken(data.access_token);
   };
 
-  const signUp = async (email: string, password: string) => {
-    if (!email || !password) {
+  const signUp = async (email: string, password: string, name: string) => {
+    if (!email || !password || !name) {
       throw new Error('Credenciais inválidas');
     }
 
@@ -81,7 +81,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, name }),
       }
     );
 

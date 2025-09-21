@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 export function CardSignUp() {
   const navigate = useNavigate();
   const { signUp } = useAuth();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -33,6 +34,16 @@ export function CardSignUp() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    if (!name.trim()) {
+      setError('O nome é obrigatório');
+      return;
+    }
+
+    if (!email.trim()) {
+      setError('O e-mail é obrigatório');
+      return;
+    }
 
     if (password !== confirmPassword) {
       setError('As senhas não coincidem');
@@ -45,7 +56,7 @@ export function CardSignUp() {
     }
 
     try {
-      await signUp(email, password);
+      await signUp(email.trim(), password.trim(), name.trim());
       navigate('/');
     } catch (err) {
       setError('Erro ao criar conta. Tente novamente.');
@@ -84,6 +95,27 @@ export function CardSignUp() {
         <CardContent className="px-8">
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col gap-5">
+              <div className="space-y-3">
+                <Label
+                  htmlFor="email"
+                  className="text-sm font-semibold text-foreground"
+                >
+                  Nome
+                </Label>
+                <div className="relative">
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5" />
+                  <Input
+                    id="name"
+                    type="text"
+                    placeholder="Seu nome completo"
+                    required
+                    className="pl-11 h-12 rounded-xl border-2 border-input focus:border-ring focus:ring-2 focus:ring-ring/20 transition-all duration-200 bg-background"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+              </div>
+
               <div className="space-y-3">
                 <Label
                   htmlFor="email"
