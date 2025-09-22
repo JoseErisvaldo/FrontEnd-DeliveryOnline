@@ -1,5 +1,5 @@
 import getAllEstablishments from "@/api/establishment/get-all-establishments";
-import { establishmentSchema } from "@/types/establishment";
+import { establishmentSchema } from "@/types/establishment/get-establishment";
 import { z } from "zod";
 
 export const getAllEstablishmentsService = {

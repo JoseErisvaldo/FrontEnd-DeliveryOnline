@@ -1,5 +1,5 @@
 import { getAuthToken } from "@/lib/token";
-import type { EstablishmentResponse } from "@/types/establishment";
+import type { EstablishmentResponse } from "@/types/establishment/get-establishment";
 
 export default async function getAllEstablishments(): Promise<EstablishmentResponse[]> { 
     const token = getAuthToken()
