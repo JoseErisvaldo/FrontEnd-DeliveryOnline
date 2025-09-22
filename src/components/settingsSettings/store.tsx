@@ -1,12 +1,15 @@
 import { useGetAllEstablishments } from '@/hooks/establishment/use-get-all-establishment';
 import { Card, CardHeader, CardContent } from '../ui/card';
-import { MapPin, IdCard, CalendarRange, House } from 'lucide-react';
+import { MapPin, IdCard, CalendarRange, House, RefreshCcw } from 'lucide-react';
 import { Alerts } from '../common/alert';
 import { SkeletonEstablishment } from '../common/skeleton/skeleton-establishment';
+import { Button } from '../ui/button';
 
 export default function Store() {
-  const { establishments, loading, error } = useGetAllEstablishments();
+  const { establishments, loading, error, refetch } = useGetAllEstablishments();
+
   if (loading) return <SkeletonEstablishment />;
+
   if (error)
     return (
       <Alerts
@@ -17,6 +20,7 @@ export default function Store() {
         type="destructive"
       />
     );
+
   if (establishments.length === 0)
     return (
       <Alerts
@@ -27,14 +31,21 @@ export default function Store() {
         type="destructive"
       />
     );
+
   return (
     <>
-      <h2 className="font-bold text-lg mb-2">
-        Configurações{' '}
-        {establishments.length > 1
-          ? 'dos Estabelecimentos'
-          : 'do Estabelecimento'}
-      </h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="font-bold text-lg">
+          Configurações{' '}
+          {establishments.length > 1
+            ? 'dos Estabelecimentos'
+            : 'do Estabelecimento'}
+        </h2>
+        <Button variant="outline" onClick={() => refetch()} className="flex items-center gap-2 cursor-pointer mr-3">
+          <RefreshCcw className="w-4 h-4" /> Atualizar
+        </Button>
+      </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {establishments.map((est) => (
           <Card
@@ -63,6 +74,7 @@ export default function Store() {
                 <span>{est.createdAt.toLocaleString()}</span>
               </div>
             </CardContent>
+
             <CardContent className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <CalendarRange className="w-4 h-4" />
@@ -70,6 +82,7 @@ export default function Store() {
                 <span>{est.updatedAt.toLocaleString()}</span>
               </div>
             </CardContent>
+
             <CardContent className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-gray-400" />
