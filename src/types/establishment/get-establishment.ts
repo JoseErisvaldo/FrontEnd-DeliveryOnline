@@ -9,11 +9,6 @@ export type EstablishmentResponse = {
   updatedAt: Date;
 };
 
-export type CreateEstablishmentPayload = {
-  name: string;
-  address: string;
-};
-
 export const establishmentSchema = z.object({
   id: z.string(),
   name: z.string(),
