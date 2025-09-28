@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -8,35 +8,41 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { usePostEstablishment } from "@/hooks/establishment/use-post-establishment";
-import { establishmentCreateSchema } from "@/types/establishment/post-establishment";
-import React from "react";
-import type { EstablishmentCreateInput } from "@/types/establishment/post-establishment";
-import { Alerts } from "../common/alert";
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { usePostEstablishment } from '@/hooks/establishment/use-post-establishment';
+import { establishmentCreateSchema } from '@/types/establishment/post-establishment';
+import React from 'react';
+import type { EstablishmentCreateInput } from '@/types/establishment/post-establishment';
+import { Alerts } from '../common/alert';
 
 export function DialogStore() {
   const [formData, setFormData] = React.useState<EstablishmentCreateInput>({
-    name: "",
-    address: "",
-    street: "",
-    number: "",
-    complement: "",
-    neighborhood: "",
-    city: "",
-    state: "",
-    country: "",
-    zipCode: "",
+    name: '',
+    photo: '',
+    address: '',
+    street: '',
+    number: '',
+    complement: '',
+    neighborhood: '',
+    city: '',
+    state: '',
+    country: '',
+    zipCode: '',
   });
   const [formError, setFormError] = React.useState<string | null>(null);
-  const [validationError, setValidationError] = React.useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = React.useState<string | null>(null);
+  const [validationError, setValidationError] = React.useState<string | null>(
+    null
+  );
+  const [successMessage, setSuccessMessage] = React.useState<string | null>(
+    null
+  );
 
   const { mutate, reset, status } = usePostEstablishment();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e)
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -54,28 +60,30 @@ export function DialogStore() {
       mutate(data, {
         onSuccess: () => {
           setFormData({
-            name: "",
-            address: "",
-            street: "",
-            number: "",
-            complement: "",
-            neighborhood: "",
-            city: "",
-            state: "",
-            country: "",
-            zipCode: "",
+            name: '',
+            photo: '',
+            address: '',
+            street: '',
+            number: '',
+            complement: '',
+            neighborhood: '',
+            city: '',
+            state: '',
+            country: '',
+            zipCode: '',
           });
 
-          setSuccessMessage("Criado com sucesso!");
+          setSuccessMessage('Criado com sucesso!');
           setTimeout(() => {
             setSuccessMessage(null);
             reset();
           }, 3000);
         },
-         onError: (error) => {
-          setFormError(error.message || "Erro ao criar estabelecimento");
+        onError: (error) => {
+          setFormError(error.message || 'Erro ao criar estabelecimento');
         },
       });
+      console.log(data)
     } catch (err) {
       if (err instanceof Error) {
         setValidationError(err.message);
@@ -102,73 +110,137 @@ export function DialogStore() {
 
           <div className="grid gap-2">
             <Label htmlFor="name">Nome (obrigatório)</Label>
-            <Input id="name" name="name" value={formData.name} onChange={handleChange} required />
+            <Input
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="photo">Url da foto</Label>
+            <Input
+              id="photo"
+              name="photo"
+              value={formData.photo}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="address">Endereço (opcional)</Label>
-            <Input id="address" name="address" value={formData.address} onChange={handleChange} />
+            <Input
+              id="address"
+              name="address"
+              value={formData.address}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="street">Rua (opcional)</Label>
-            <Input id="street" name="street" value={formData.street} onChange={handleChange} />
+            <Input
+              id="street"
+              name="street"
+              value={formData.street}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="number">Número (opcional)</Label>
-            <Input id="number" name="number" value={formData.number} onChange={handleChange} />
+            <Input
+              id="number"
+              name="number"
+              value={formData.number}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="complement">Complemento (opcional)</Label>
-            <Input id="complement" name="complement" value={formData.complement} onChange={handleChange} />
+            <Input
+              id="complement"
+              name="complement"
+              value={formData.complement}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="neighborhood">Bairro (opcional)</Label>
-            <Input id="neighborhood" name="neighborhood" value={formData.neighborhood} onChange={handleChange} />
+            <Input
+              id="neighborhood"
+              name="neighborhood"
+              value={formData.neighborhood}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="city">Cidade (opcional)</Label>
-            <Input id="city" name="city" value={formData.city} onChange={handleChange} />
+            <Input
+              id="city"
+              name="city"
+              value={formData.city}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="state">Estado (opcional)</Label>
-            <Input id="state" name="state" value={formData.state} onChange={handleChange} />
+            <Input
+              id="state"
+              name="state"
+              value={formData.state}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="country">País (opcional)</Label>
-            <Input id="country" name="country" value={formData.country} onChange={handleChange} />
+            <Input
+              id="country"
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="grid gap-2">
             <Label htmlFor="zipCode">CEP (opcional)</Label>
-            <Input id="zipCode" name="zipCode" value={formData.zipCode} onChange={handleChange} />
+            <Input
+              id="zipCode"
+              name="zipCode"
+              value={formData.zipCode}
+              onChange={handleChange}
+            />
           </div>
 
           {(formError || successMessage) && (
             <Alerts
               message={{
-                title: formError ? "Erro" : "Sucesso",
-                description: formError || successMessage || "",
+                title: formError ? 'Erro' : 'Sucesso',
+                description: formError || successMessage || '',
               }}
-              type={formError ? "destructive" : "default"}
+              type={formError ? 'destructive' : 'default'}
             />
           )}
 
-          {validationError && <p className="text-red-600">Erro de validação: {validationError}</p>}
+          {validationError && (
+            <p className="text-red-600">Erro de validação: {validationError}</p>
+          )}
 
           <DialogFooter className="grid grid-cols-1 gap-2">
             <div className="flex justify-end gap-2">
               <DialogClose asChild>
                 <Button variant="outline">Cancelar</Button>
               </DialogClose>
-              <Button type="submit" disabled={status === "pending"}>
-                {status === "pending" ? "Salvando..." : "Salvar"}
+              <Button type="submit" disabled={status === 'pending'}>
+                {status === 'pending' ? 'Salvando...' : 'Salvar'}
               </Button>
             </div>
           </DialogFooter>

@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
-export const establishmentSchema = z.object({
-  id: z.string(),
-  name: z.string(),
+export const establishmentUpdateSchema = z.object({
+  name: z.string().min(1, 'Nome obrigatório').optional(),
+  photo: z.string().nullable().optional(),
   address: z.string().nullable().optional(),
   street: z.string().nullable().optional(),
   number: z.string().nullable().optional(),
@@ -12,12 +12,6 @@ export const establishmentSchema = z.object({
   state: z.string().nullable().optional(),
   country: z.string().nullable().optional(),
   zipCode: z.string().nullable().optional(),
-  photo: z.string().nullable().optional(),
-  ownerId: z.string(),
-  statusId: z.number().nullable().optional(),
-  statusName: z.string().nullable().optional(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
 });
 
-export type EstablishmentSchemaZod = z.infer<typeof establishmentSchema>;
+export type EstablishmentUpdateInput = z.infer<typeof establishmentUpdateSchema>;

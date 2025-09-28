@@ -1,5 +1,5 @@
-import getProfileApi from "@/api/profile/get-profile";
-import { profileSchema } from "@/types/user";
+import getProfileApi from '@/api/profile/get-profile';
+import { profileSchema } from '@/types/user';
 
 export const getProfileService = {
   fetch: async () => {

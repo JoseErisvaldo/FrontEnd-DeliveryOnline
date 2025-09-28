@@ -1,19 +1,18 @@
 import { getAuthToken } from '@/lib/token';
-import type {
-  Establishment,
-  EstablishmentCreateInput,
-} from '@/types/establishment/post-establishment';
+import type { EstablishmentUpdateInput } from '@/types/establishment/patch.establishment';
+import type { Establishment } from '@/types/establishment/post-establishment';
 
-export async function createEstablishmentApi(
-  payload: EstablishmentCreateInput
+export async function updateEstablishmentApi(
+  id: string,
+  payload: EstablishmentUpdateInput
 ): Promise<Establishment> {
   const token = getAuthToken();
 
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/establishments`,
+      `${import.meta.env.VITE_API_URL}/establishments/${id}`,
       {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -31,7 +30,6 @@ export async function createEstablishmentApi(
     return response.json();
   } catch (err: any) {
     if (err.name === 'TypeError') {
-      // Erros de rede, CORS ou backend desligado
       throw new Error('Erro de rede: não foi possível conectar ao servidor');
     }
     throw err;
