@@ -4,7 +4,6 @@ import { SkeletonUser } from '../common/skeleton/skeleton-profile';
 
 export default function UserSettings() {
   const { profile, loading, error } = useGetProfile();
-  console.log('User data:', profile);
   if (loading) return <SkeletonUser />;
 
   if (error)

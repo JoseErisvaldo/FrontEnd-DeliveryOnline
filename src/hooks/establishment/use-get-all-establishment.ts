@@ -1,9 +1,9 @@
 import { getAllEstablishmentsService } from '@/service/establishment/get-all-establishments-service';
+import type { EstablishmentSchemaZod } from '@/types/establishment/get-establishment';
 import { useEffect, useState, useCallback } from 'react';
-import type { EstablishmentResponse } from '@/types/establishment/get-establishment';
 
 export function useGetAllEstablishments() {
-  const [establishments, setEstablishments] = useState<EstablishmentResponse[]>(
+  const [establishments, setEstablishments] = useState<EstablishmentSchemaZod[]>(
     []
   );
   const [loading, setLoading] = useState<boolean>(true);
@@ -18,9 +18,7 @@ export function useGetAllEstablishments() {
       .then((data) =>
         setEstablishments(
           data.map((item) => ({
-            ...item,
-            createdAt: new Date(item.createdAt),
-            updatedAt: new Date(item.updatedAt),
+            ...item
           }))
         )
       )

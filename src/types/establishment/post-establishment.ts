@@ -18,6 +18,7 @@ import { z } from 'zod';
 
 export const establishmentCreateSchema = z.object({
   name: z.string().min(1, 'Nome obrigatório'),
+  photo: z.string().optional(),
   address: z.string().optional(),
   street: z.string().optional(),
   number: z.string().optional(),

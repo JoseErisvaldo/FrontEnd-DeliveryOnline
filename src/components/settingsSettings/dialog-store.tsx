@@ -20,6 +20,7 @@ import { Alerts } from '../common/alert';
 export function DialogStore() {
   const [formData, setFormData] = React.useState<EstablishmentCreateInput>({
     name: '',
+    photo: '',
     address: '',
     street: '',
     number: '',
@@ -41,6 +42,7 @@ export function DialogStore() {
   const { mutate, reset, status } = usePostEstablishment();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e)
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -59,6 +61,7 @@ export function DialogStore() {
         onSuccess: () => {
           setFormData({
             name: '',
+            photo: '',
             address: '',
             street: '',
             number: '',
@@ -80,6 +83,7 @@ export function DialogStore() {
           setFormError(error.message || 'Erro ao criar estabelecimento');
         },
       });
+      console.log(data)
     } catch (err) {
       if (err instanceof Error) {
         setValidationError(err.message);
@@ -110,6 +114,17 @@ export function DialogStore() {
               id="name"
               name="name"
               value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="grid gap-2">
+            <Label htmlFor="photo">Url da foto</Label>
+            <Input
+              id="photo"
+              name="photo"
+              value={formData.photo}
               onChange={handleChange}
               required
             />

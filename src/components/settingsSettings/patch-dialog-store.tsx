@@ -27,7 +27,6 @@ export default function PatchDialogStore({
 }: PatchDialogStoreProps) {
   const { mutate: updateEstablishment, isPending: isLoading } =
     usePutEstablishment();
-
   const {
     register,
     handleSubmit,
@@ -36,7 +35,7 @@ export default function PatchDialogStore({
     resolver: zodResolver(establishmentUpdateSchema),
     defaultValues,
   });
-
+  
   const onSubmit = (data: EstablishmentUpdateInput) => {
     updateEstablishment(
       { id: establishmentId, data },
@@ -66,6 +65,7 @@ export default function PatchDialogStore({
               label: 'Nome',
               placeholder: 'Nome do estabelecimento',
             },
+            { name: 'photo', label: 'Foto', placeholder: 'Foto' },
             { name: 'address', label: 'Endereço', placeholder: 'Endereço' },
             { name: 'street', label: 'Rua', placeholder: 'Rua' },
             { name: 'number', label: 'Número', placeholder: 'Número' },

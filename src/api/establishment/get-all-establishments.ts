@@ -1,8 +1,8 @@
 import { getAuthToken } from '@/lib/token';
-import type { EstablishmentResponse } from '@/types/establishment/get-establishment';
+import type { EstablishmentSchemaZod } from '@/types/establishment/get-establishment';
 
 export default async function getAllEstablishments(): Promise<
-  EstablishmentResponse[]
+  EstablishmentSchemaZod[]
 > {
   const token = getAuthToken();
   const response = await fetch(

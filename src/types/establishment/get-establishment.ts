@@ -1,21 +1,23 @@
 import { z } from 'zod';
 
-export type EstablishmentResponse = {
-  id: string;
-  name: string;
-  ownerId: string;
-  address: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
 export const establishmentSchema = z.object({
   id: z.string(),
   name: z.string(),
+  address: z.string().nullable().optional(),
+  street: z.string().nullable().optional(),
+  number: z.string().nullable().optional(),
+  complement: z.string().nullable().optional(),
+  neighborhood: z.string().nullable().optional(),
+  city: z.string().nullable().optional(),
+  state: z.string().nullable().optional(),
+  country: z.string().nullable().optional(),
+  zipCode: z.string().nullable().optional(),
+  photo: z.string().nullable().optional(),
   ownerId: z.string(),
-  address: z.string(),
+  statusId: z.number().nullable().optional(),
+  statusName: z.string().nullable().optional(),
   createdAt: z.string(),
   updatedAt: z.string(),
 });
 
-export type EstablishmentResponseZod = z.infer<typeof establishmentSchema>;
+export type EstablishmentSchemaZod = z.infer<typeof establishmentSchema>;
