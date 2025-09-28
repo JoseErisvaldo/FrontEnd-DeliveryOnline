@@ -1,6 +1,6 @@
-import { getProfileService } from "@/service/profile/get-profile-service";
-import type { ProfileResponse } from "@/types/user";
-import { useEffect, useState } from "react";
+import { getProfileService } from '@/service/profile/get-profile-service';
+import type { ProfileResponse } from '@/types/user';
+import { useEffect, useState } from 'react';
 
 export function useGetProfile() {
   const [profile, setProfile] = useState<ProfileResponse | null>(null);
@@ -8,7 +8,8 @@ export function useGetProfile() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    getProfileService.fetch()
+    getProfileService
+      .fetch()
       .then((data) => setProfile(data))
       .catch((err: Error) => setError(err.message))
       .finally(() => setLoading(false));

@@ -14,10 +14,10 @@ export interface Establishment {
   updatedAt: string | Date;
 }
 
-import { z } from "zod";
+import { z } from 'zod';
 
 export const establishmentCreateSchema = z.object({
-  name: z.string().min(1, "Nome obrigatório"),
+  name: z.string().min(1, 'Nome obrigatório'),
   address: z.string().optional(),
   street: z.string().optional(),
   number: z.string().optional(),
@@ -29,4 +29,6 @@ export const establishmentCreateSchema = z.object({
   zipCode: z.string().optional(),
 });
 
-export type EstablishmentCreateInput = z.infer<typeof establishmentCreateSchema>;
+export type EstablishmentCreateInput = z.infer<
+  typeof establishmentCreateSchema
+>;

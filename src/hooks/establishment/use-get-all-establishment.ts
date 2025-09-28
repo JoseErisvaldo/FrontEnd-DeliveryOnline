@@ -1,9 +1,11 @@
-import { getAllEstablishmentsService } from "@/service/establishment/get-all-establishments-service";
-import { useEffect, useState, useCallback } from "react";
-import type { EstablishmentResponse } from "@/types/establishment/get-establishment";
+import { getAllEstablishmentsService } from '@/service/establishment/get-all-establishments-service';
+import { useEffect, useState, useCallback } from 'react';
+import type { EstablishmentResponse } from '@/types/establishment/get-establishment';
 
 export function useGetAllEstablishments() {
-  const [establishments, setEstablishments] = useState<EstablishmentResponse[]>([]);
+  const [establishments, setEstablishments] = useState<EstablishmentResponse[]>(
+    []
+  );
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -11,7 +13,8 @@ export function useGetAllEstablishments() {
     setLoading(true);
     setError(null);
 
-    getAllEstablishmentsService.fetchAll()
+    getAllEstablishmentsService
+      .fetchAll()
       .then((data) =>
         setEstablishments(
           data.map((item) => ({

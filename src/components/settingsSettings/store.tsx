@@ -4,6 +4,7 @@ import { MapPin, IdCard, CalendarRange, House, RefreshCcw } from 'lucide-react';
 import { Alerts } from '../common/alert';
 import { SkeletonEstablishment } from '../common/skeleton/skeleton-establishment';
 import { Button } from '../ui/button';
+import PatchDialogStore from './patch-dialog-store';
 
 export default function Store() {
   const { establishments, loading, error, refetch } = useGetAllEstablishments();
@@ -41,7 +42,11 @@ export default function Store() {
             ? 'dos Estabelecimentos'
             : 'do Estabelecimento'}
         </h2>
-        <Button variant="outline" onClick={() => refetch()} className="flex items-center gap-2 cursor-pointer mr-3">
+        <Button
+          variant="outline"
+          onClick={() => refetch()}
+          className="flex items-center gap-2 cursor-pointer mr-3"
+        >
           <RefreshCcw className="w-4 h-4" /> Atualizar
         </Button>
       </div>
@@ -52,6 +57,9 @@ export default function Store() {
             key={est.id}
             className="hover:shadow-lg transition-shadow duration-200"
           >
+            <div className="pr-3 flex justify-end">
+              <PatchDialogStore establishmentId={est.id} defaultValues={est} />
+            </div>
             <CardHeader>
               <div className="flex flex-col">
                 <h2 className="font-bold text-lg flex gap-2 items-center">
