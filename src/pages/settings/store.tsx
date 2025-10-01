@@ -11,7 +11,7 @@ export default function SettingsStore() {
       <div className="flex justify-end p-3">
         <DialogStore />
       </div>
-      <Store />
+      
     </div>
   );
 }
