@@ -1,4 +1,3 @@
-//testar commit na main
 import './App.css';
 import { RouterApp } from './router-app';
 
