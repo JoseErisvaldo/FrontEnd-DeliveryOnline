@@ -95,8 +95,6 @@ API
 | **Hooks**             | Controla a lógica de estado e efeitos colaterais (side effects) da feature. Usa **React Query** e **React Hook Form** para gerenciamento. | `useGetOrders`, `usePostCategory`, `useAuth`.                    |
 | **Services**          | Centraliza regras de negócio da feature e abstrai chamadas à API.                                                                         | Funções como `createOrderService()` ou `getCategoriesService()`. |
 | **API**               | Ponto de comunicação com o backend (**NestJS**). Define endpoints, headers, autenticação e manipulação de respostas.                      | Funções de `fetch`, `axios`, ou wrappers com `react-query`.      |
-| **NestJS / Database** | Backend responsável por processar requisições, aplicar validações, regras de domínio e persistir dados no banco.                          | Módulos, DTOs, entidades e repositórios NestJS.                  |
-
 ```
 
 ---
