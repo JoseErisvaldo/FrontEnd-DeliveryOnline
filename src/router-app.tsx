@@ -9,31 +9,30 @@ import { Suspense, type ReactNode } from 'react';
 
 import { AuthProvider, useAuth } from './components/context/auth-context';
 import { SidebarProvider, SidebarTrigger } from './components/ui/sidebar';
-import { AppSidebar } from './components/app-sidebar';
-import { ThemeProvider } from './components/theme-provider';
-import { CardSignIn } from './components/auth/sign-in';
-import { CardSignUp } from './components/auth/sign-up';
-import Home from './pages/home/page';
-import DashboardOverview from './pages/dashboard/overview';
-import DashboardReports from './pages/dashboard/reports';
-import DashboardAnalytics from './pages/dashboard/analytics';
-import OrdersActive from './pages/orders/active';
-import OrdersHistory from './pages/orders/history';
-import OrdersCancelled from './pages/orders/cancelled';
-import MenuProducts from './pages/menu/products';
-import MenuCategories from './pages/menu/categories';
-import MenuCombos from './pages/menu/combos';
-import CustomersFeedbacks from './pages/customers/feedbacks';
-import CustomersLoyalty from './pages/customers/loyalty';
-import DriversRoutes from './pages/drivers/routes';
-import DriversReports from './pages/drivers/reports';
-import FinancePayments from './pages/finance/payments';
-import FinanceInvoices from './pages/finance/invoices';
-import FinanceFees from './pages/finance/fees';
-import SettingsStore from './pages/settings/store';
-import SettingsHours from './pages/settings/hours';
-import SettingsIntegrations from './pages/settings/integrations';
-import SettingsTeam from './pages/settings/team';
+import { AppSidebar } from './shared/ui/app-sidebar';
+import { ThemeProvider } from './shared/ui/theme-provider';
+import { CardSignIn } from './shared/auth/sign-in';
+import { CardSignUp } from './shared/auth/sign-up';
+import Home from './features/dashboard/home/page/page';
+import DashboardOverview from './features/dashboard/overview/page/overview';
+import DashboardReports from './features/drivers/reports/page/reports';
+import DashboardAnalytics from './features/dashboard/analytics/page/analytics';
+import OrdersActive from './features/orders/active/page/active';
+import OrdersHistory from './features/orders/history/page/history';
+import OrdersCancelled from './features/orders/cancelled/page/cancelled';
+import MenuProducts from './features/menu/products/page/products';
+import MenuCombos from './features/menu/combos/page/combos';
+import CustomersLoyalty from './features/customers/loyalty/page/loyalty';
+import DriversReports from './features/delivery-report/page/delivery-report';
+import FinancePayments from './features/finance/payments/page/payments';
+import FinanceInvoices from './features/finance/invoices/page/invoices';
+import FinanceFees from './features/finance/fees/page/fees';
+import SettingsStore from './features/settings/store/page/store';
+import SettingsHours from './features/settings/hours/page/hours';
+import SettingsIntegrations from './features/settings/integrations/page/integrations';
+import SettingsTeam from './features/settings/team/page/team';
+import MenuCategories from './features/menu/categories/pages/categories';
+import CustomersFeedbacks from './features/customers/feedbacks/page/feedbacks';
 
 const LOCAL_STORAGE_KEY = 'sidebar-active-route';
 
@@ -188,14 +187,6 @@ export const RouterApp = () => {
                 }
               />
 
-              <Route
-                path="/drivers/routes"
-                element={
-                  <PrivateLayout>
-                    <DriversRoutes />
-                  </PrivateLayout>
-                }
-              />
               <Route
                 path="/drivers/reports"
                 element={
